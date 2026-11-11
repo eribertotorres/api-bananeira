@@ -25,6 +25,7 @@ $rotas = [
     '/api/v1/health' => 'GET',
     '/api/v1/auth/login' => 'POST',
     '/api/v1/auth/me' => 'GET',
+    '/api/v1/auth/logout' => 'POST',
 ];
 
     if (!isset($rotas[$caminho])) {
@@ -56,6 +57,11 @@ $rotas = [
 
     if ($caminho === '/api/v1/auth/me') {
     require dirname(__DIR__) . '/src/Modules/Auth/me.php';
+    exit;
+    }
+
+    if ($caminho === '/api/v1/auth/logout') {
+    require dirname(__DIR__) . '/src/Modules/Auth/logout.php';
     exit;
     }
     
