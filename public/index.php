@@ -20,11 +20,12 @@ try {
     $metodo = $_SERVER['REQUEST_METHOD'];
     $caminho = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    $rotas = [
-        '/' => 'GET',
-        '/api/v1/health' => 'GET',
-        '/api/v1/auth/login' => 'POST',
-    ];
+$rotas = [
+    '/' => 'GET',
+    '/api/v1/health' => 'GET',
+    '/api/v1/auth/login' => 'POST',
+    '/api/v1/auth/me' => 'GET',
+];
 
     if (!isset($rotas[$caminho])) {
         responderJson(404, [
@@ -53,6 +54,11 @@ try {
         exit;
     }
 
+    if ($caminho === '/api/v1/auth/me') {
+    require dirname(__DIR__) . '/src/Modules/Auth/me.php';
+    exit;
+    }
+    
     responderJson(200, [
         'data' => [
             'status' => 'ok',
