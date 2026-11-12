@@ -26,6 +26,7 @@ $rotas = [
     '/api/v1/auth/login' => 'POST',
     '/api/v1/auth/me' => 'GET',
     '/api/v1/auth/logout' => 'POST',
+    '/api/v1/motd' => 'GET',
 ];
 
     if (!isset($rotas[$caminho])) {
@@ -64,6 +65,11 @@ $rotas = [
     require dirname(__DIR__) . '/src/Modules/Auth/logout.php';
     exit;
     }
+
+    if ($caminho === '/api/v1/motd') {
+    require dirname(__DIR__) . '/src/Modules/Motd/consultar.php';
+    exit;
+    }   
     
     responderJson(200, [
         'data' => [
